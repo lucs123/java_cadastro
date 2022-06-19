@@ -5,6 +5,7 @@ class Denunciante{
     private String email;
     private boolean authenticated = false;
     Denuncias denuncias = new Denuncias();
+    Denunciantes denunciantes = new Denunciantes();
     Scanner in = new Scanner(System.in);
 
     public void menu(){
@@ -34,12 +35,12 @@ class Denunciante{
         System.out.println("Digite a senha:");
         String senha = in.nextLine();
 
-        boolean auth = authDenunciante(email, senha);
+        denunciantes.cadastrarDenunciante(email, senha);
 
-        if(auth){
-            this.email = email;
-            this.senha = senha;
-        }
+        this.email = email;
+        this.senha = senha;
+
+        menu();
     }
     
     public void logarDenunciante(){
@@ -51,7 +52,7 @@ class Denunciante{
         System.out.println("Digite a senha:");
         String senha = in.nextLine();
 
-        boolean auth = authDenunciante(email, senha);
+        boolean auth = denunciantes.logarDenunciante(email, senha);
 
         if(auth){
             this.email = email;
@@ -59,14 +60,6 @@ class Denunciante{
 
             menu();
         }
-    }
-
-    public boolean authDenunciante(String email, String senha){
-        boolean auth = false;
-        if(email.equals("teste") && senha.equals("teste")){
-            auth = true;
-        }
-        return auth;
     }
 
     public void novaDenuncia(){
